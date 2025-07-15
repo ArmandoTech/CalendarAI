@@ -103,6 +103,5 @@ public class GoalController {
         
 
         return ResponseEntity.ok(schedule);
-}
-
+    }
 }
