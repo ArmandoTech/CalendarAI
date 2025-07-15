@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.ArrayList;
 
@@ -72,7 +73,7 @@ public class GoalController {
     @GetMapping("/schedule/{userId}")
     public ResponseEntity<Map<String, List<Map<String, Object>>>> generateSchedule(@PathVariable String userId) { // Returns a map of days and a list of goals for each day with title and number of hours
         List<Goal> goals = goalRepository.findByUserId(userId);
-        Map<String, List<Map<String, Object>>> schedule = new HashMap<>();
+        Map<String, List<Map<String, Object>>> schedule = new LinkedHashMap<String, List<Map<String, Object>>>(); // LinkedHashMap to maintain insertion order<>();
 
         // Initialize days of the week
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
