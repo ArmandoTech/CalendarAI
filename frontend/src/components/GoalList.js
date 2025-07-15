@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { API } from '../apiConfig';
+import { getGoalsByUser } from '../services/api';
 
-const GoalList = () => {
+const GoalList = ({ userId }) => {
   const [goals, setGoals] = useState([]);
 
   useEffect(() => {
-    axios.get(API.GOALS)
+    getGoalsByUser(userId)
       .then(res => setGoals(res.data))
       .catch(err => console.error("Error fetching goals", err));
-  }, []);
+  }, [userId]);
 
   return (
     <div>

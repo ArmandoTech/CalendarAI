@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { API } from '../apiConfig';
+import { getSchedule } from '../services/api';
 
-const ScheduleView = () => {
+const ScheduleView = ({ userId }) => {
   const [schedule, setSchedule] = useState({});
 
   useEffect(() => {
-    axios.get(API.SCHEDULE)
-      .then(res => setSchedule(res.data))
-      .catch(err => console.error("Error fetching schedule", err));
-  }, []);
+    getSchedule(userId).then(res => setSchedule(res.data)).catch(console.error);
+  }, [userId]);
 
   return (
     <div>
-      <h2>Weekly Schedule</h2>
-      {Object.keys(schedule).map(day => (
+      {Object.entries(schedule).map(([day, tasks]) => (
         <div key={day}>
-          <h4>{day}</h4>
+          <h3>{day}</h3>
           <ul>
-            {schedule[day].map((slot, index) => (
-              <li key={index}>{slot.goalTitle} - {slot.hours}h</li>
+            {tasks.map((task, idx) => (
+              <li key={idx}>{task.title} - {task.allocatedHours}h</li>
             ))}
           </ul>
         </div>

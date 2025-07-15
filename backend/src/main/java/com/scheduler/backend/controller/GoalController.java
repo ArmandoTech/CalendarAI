@@ -60,6 +60,14 @@ public class GoalController {
         .orElse(ResponseEntity.notFound().build());
     }
 
+    // GET: Fetch goals by userId
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Goal>> getGoalsByUser(@PathVariable String userId) {
+        List<Goal> userGoals = goalRepository.findByUserId(userId);
+        return ResponseEntity.ok(userGoals);
+}
+
+
     // Schedule tasks
     @GetMapping("/schedule/{userId}")
     public ResponseEntity<Map<String, List<Map<String, Object>>>> generateSchedule(@PathVariable String userId) { // Returns a map of days and a list of goals for each day with title and number of hours
@@ -91,6 +99,7 @@ public class GoalController {
                 schedule.get(day).add(goalInfo); // Add the goal to the corresponding day
             }
         }
+        
 
         return ResponseEntity.ok(schedule);
 }
