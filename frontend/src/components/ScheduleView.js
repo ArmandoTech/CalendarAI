@@ -15,7 +15,7 @@ const ScheduleView = ({ userId }) => {
           <h3>{day}</h3>
           <ul>
             {tasks.map((task, idx) => (
-              <li key={idx}>{task.title} - {task.allocatedHours}h</li>
+              <li key={idx}>{task.title} - {task.hours}h</li>
             ))}
           </ul>
         </div>

@@ -12,7 +12,6 @@ const GoalList = ({ userId }) => {
 
   return (
     <div>
-      <h2>All Goals</h2>
       <ul>
         {goals.map(goal => (
           <li key={goal.id}>
