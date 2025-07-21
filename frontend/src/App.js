@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase"; // Firebase Auth
+import CalendarConnect from "./components/CalendarConnect";
 
 import GoalList from "./components/GoalList";
 import ScheduleView from "./components/ScheduleView";
@@ -9,6 +10,7 @@ import Logout from "./components/Logout";
 
 function App() {
   const [user, setUser] = useState(null); // Holds logged-in user info
+  const [calendarToken, setCalendarToken] = useState(null);
 
   // Listen for auth state changes
   useEffect(() => {
@@ -37,6 +39,7 @@ function App() {
               className="w-16 h-16 rounded-full my-2"
             />
             <p>Email: {user.email}</p>
+            <CalendarConnect onAuthSuccess={setCalendarToken} />
             <Logout setUser={setUser} />
           </div>
 
